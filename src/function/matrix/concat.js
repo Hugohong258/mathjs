@@ -10,12 +10,14 @@ const dependencies = ['typed', 'matrix', 'isInteger']
 
 export const createConcat = /* #__PURE__ */ factory(name, dependencies, ({ typed, matrix, isInteger }) => {
   /**
-   * Concatenate two or more matrices.
+   * Concatenate matrices or strings. Strings are joined in order and do not
+   * accept a dimension argument.
    *
    * Syntax:
    *
    *     math.concat(A, B, C, ...)
    *     math.concat(A, B, C, ..., dim)
+   *     math.concat(str1, str2, ...)
    *
    * Where:
    *
@@ -35,8 +37,10 @@ export const createConcat = /* #__PURE__ */ factory(name, dependencies, ({ typed
    *
    *    size, squeeze, subset, transpose
    *
-   * @param {... Array | Matrix} args     Two or more matrices
-   * @return {Array | Matrix} Concatenated matrix
+   * @param {... Array | Matrix | string | number | BigNumber} args  Matrices or
+   *                            strings to concatenate, with an optional dimension
+   *                            for matrices
+   * @return {Array | Matrix | string} Concatenated matrix or string
    */
   return typed(name, {
     // TODO: change signature to '...Array | Matrix, dim?' when supported
